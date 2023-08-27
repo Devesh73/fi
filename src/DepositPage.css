@@ -1,36 +1,22 @@
-/* App.css */
-.App {
-    text-align: center;
-  }
-  
-  /* Header */
-  .App-header {
-    background-color: #007bff;
-    color: white;
-    padding: 1rem;
-  }
-  
-  /* BankDetailsPage.css */
-  .bank-details {
-    background-color: #f8f8f8;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* WithdrawPage.css */
-  .withdraw-container {
-    background-color: #f8f8f8;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* DepositPage.css */
-  .deposit-container {
-    background-color: #f8f8f8;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
+.bank-details-container, .deposit-container, .withdraw-container {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.bank-details-container h2, .deposit-container h2, .withdraw-container h2 {
+  color: #5a67d8;
+  margin-bottom: 15px;
+}
+
+.bank-details-container p, .deposit-container p, .withdraw-container p {
+  margin: 10px;
+}
+
+.bank-details-container .loading, .deposit-container .message, .withdraw-container .message {
+  color: #ff6347;
+  margin-top: 10px;
+}
