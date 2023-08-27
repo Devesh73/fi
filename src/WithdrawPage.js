@@ -1,61 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import './WithdrawPage.css'; // Make sure you have the corresponding CSS file
+import React, { useState } from 'react';
+import './WithdrawPage.css';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import 'firebase/compat/database';
+import 'firebase/compat/firestore';
 
 const WithdrawPage = ({ loggedInUser }) => {
   const [amount, setAmount] = useState('');
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    const userId = loggedInUser.uid;
-    
-    firebase
-      .database()
-      .ref(`users/${userId}`)
-      .once('value')
-      .then((snapshot) => {
-        setUserData(snapshot.val());
-      })
-      .catch((error) => {
-        console.error('Fetch user data error:', error);
-      });
-  }, [loggedInUser]);
+  const [message, setMessage] = useState('');
 
   const handleWithdraw = async () => {
+    if (!loggedInUser || !loggedInUser.uid) {
+      setMessage('Please log in to withdraw.');
+      return;
+    }
+
+    if (isNaN(amount) || parseFloat(amount) <= 0) {
+      setMessage('Please enter a valid amount.');
+      return;
+    }
+
+    const userRef = firebase.firestore().collection('users').doc(loggedInUser.uid);
+
     try {
-      const userId = loggedInUser.uid;
-
-      if (userData && parseInt(amount, 10) <= userData.balance) {
-        const newBalance = userData.balance - parseInt(amount, 10);
-
-        await firebase.database().ref(`users/${userId}/balance`).set(newBalance);
-        
-        // Update the userData state with the new balance
-        setUserData((prevUserData) => ({
-          ...prevUserData,
-          balance: newBalance,
-        }));
-
-        alert('Withdraw successful');
-        setAmount('');
+      const userDoc = await userRef.get();
+      if (userDoc.exists) {
+        const userData = userDoc.data();
+        if (parseFloat(amount) > userData.balance) {
+          setMessage('Minimum balance insufficient.');
+        } else {
+          const newBalance = userData.balance - parseFloat(amount);
+          await userRef.update({ balance: newBalance });
+          setMessage(`Successfully withdrawn Rs. ${amount}`);
+          setAmount('');
+        }
       } else {
-        alert('Insufficient balance for withdrawal.');
+        setMessage('User data not found.');
       }
     } catch (error) {
       console.error('Withdraw error:', error);
-      alert('Withdraw failed. Please check your credentials and try again.');
+      setMessage('An error occurred during withdrawal.');
     }
   };
 
   return (
     <div className="withdraw-container">
-      <h2>Withdraw Page</h2>
-      <label>Amount:</label>
-      <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
-      <br />
-      <button onClick={handleWithdraw}>Withdraw</button>
+      <h2>Withdraw Money</h2>
+      <div className="withdraw-form">
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        <button onClick={handleWithdraw}>Submit</button>
+        <p className="message">{message}</p>
+      </div>
     </div>
   );
 };

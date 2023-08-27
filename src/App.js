@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import 'firebase/compat/database';
-import cryptoRandomString from 'crypto-random-string';
+import 'firebase/compat/firestore'; // Import Firestore
+// import cryptoRandomString from 'crypto-random-string';
 import BankDetailsPage from './BankDetailsPage';
 import WithdrawPage from './WithdrawPage';
 import DepositPage from './DepositPage';
@@ -20,27 +20,29 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+const firestore = firebase.firestore(); 
+
 
 function App() {
   const [page, setPage] = useState('signup');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [dob, setDob] = useState(''); // State for Date of Birth
+  const [dob, setDob] = useState('');
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-   const handleSignup = async () => {
+  const handleSignup = async () => {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       const currentUser = firebase.auth().currentUser;
-      const userId = cryptoRandomString({ length: 16, type: 'alphanumeric' });
 
-      await firebase.database().ref(`users/${userId}`).set({
+      const userDocRef = firestore.collection('users').doc(currentUser.uid);
+      await userDocRef.set({
         displayName: name,
         email,
         dob,
-        balance: 0, // Initialize balance to 0
+        balance: 0,
       });
 
       await currentUser.updateProfile({ displayName: name });
@@ -55,9 +57,6 @@ function App() {
       }
     }
   };
-  
-  
-
 
   const handleLogin = async () => {
     try {
@@ -80,8 +79,22 @@ function App() {
   };
 
   const handleCloseModal = () => {
-    setShowModal(false); // Close the modal
+    setShowModal(false);
   };
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setLoggedInUser(user);
+      } else {
+        setLoggedInUser(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <Router>
@@ -120,7 +133,6 @@ function App() {
                 &times;
               </span>
               <p>User ID: {loggedInUser.uid}</p>
-              <p>Minimum Balance: Rs. 20,000</p>
               <p>Date of Birth: {dob}</p>
               <p>Email: {loggedInUser.email}</p>
             </div>
@@ -193,6 +205,6 @@ const HomeLoggedOut = ({
       )}
     </div>
   );
-};
+}
 
 export default App;

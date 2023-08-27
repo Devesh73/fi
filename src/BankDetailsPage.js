@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import './BankDetailsPage.css'; // Import the CSS for this page if needed
+import './BankDetailsPage.css';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import 'firebase/compat/database';
+import 'firebase/compat/firestore';
 
 const BankDetailsPage = ({ loggedInUser }) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    if (loggedInUser) {
-      const userId = loggedInUser.uid;
-    
-      firebase
-        .database()
-        .ref(`users/${userId}`)
-        .once('value')
-        .then((snapshot) => {
-          const userSnapshot = snapshot.val();
-          if (userSnapshot) {
-            setUserData(userSnapshot);
-          }
-        })
-        .catch((error) => {
-          console.error('Fetch user data error:', error);
-        });
+    if (loggedInUser && loggedInUser.uid && loggedInUser.email) {
+      const userRef = firebase.firestore().collection('users').doc(loggedInUser.uid);
+
+      userRef.get().then((doc) => {
+        if (doc.exists) {
+          setUserData(doc.data());
+        } else {
+          console.log('No such document!');
+        }
+      }).catch((error) => {
+        console.log('Error getting document:', error);
+      });
     }
   }, [loggedInUser]);
 
