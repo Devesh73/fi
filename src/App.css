@@ -1,93 +1,172 @@
 .App {
-  font-family: 'Roboto', sans-serif;
-  background-color: #f4f4f4;
-  min-height: 100vh;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 10px;
+  background-color: #f0f0f0;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 0px;
+  text-indent: 10px;
 }
 
 .App-header {
-  background-color: #5a67d8;
-  padding: 20px;
-  border-radius: 0 0 20px 20px;
-  color: white;
+  background-color: #1e1e1e;
+  padding: 1px;
+  border-radius: 0 0 px 0; /* Changed border-radius to only round top-left corner */
+  color: rgb(255, 255, 255);
   width: 100%;
-  text-align: center;
+  text-align: left; /* Align the text to the left */
   margin-bottom: 40px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .welcome-container {
   display: flex;
+  font-size: 20px;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  align-items: left;
+  gap: 200px;
 }
 
 .user-name {
-  font-weight: bold;
-  color: #ff6347;
+  font-weight: small;
+  text-transform: uppercase;
+
+  color: #0d7098;
+  font-style: italic;
 }
 
-.action-buttons {
-  display: flex;
-  gap: 20px;
-}
+
+
 
 .logout-button {
-  background-color: #ff6347;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
+  background-color: #000000; 
+  border:none;
+  color: rgb(255, 255, 255);
+  padding: 12px 20px;
+  border-radius: 10px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.0s ease;
+}
+.logout-button:hover {
+  background-color: #0d7098;
+  color:#ffffff;
+  transform: scale(1.05); 
 }
 
 .auth-container {
-  display: flex;
+  
   justify-content: center;
   gap: 20px;
 }
 
 .auth-form {
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #cdcdcd;
+  border-radius: 13px;
   padding: 30px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  align-items: center;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  gap: 25px;
+  align-items: left;
+  box-shadow: 15px 8px 11px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
 }
 
 .auth-form h2 {
-  color: #5a67d8;
-  margin-bottom: 15px;
+  color: #000000;
+  font-size: 39px;
+  margin-bottom: 35px;
 }
 
 .auth-form input {
-  width: 100%;
+  width: 90%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #8a8686;
   border-radius: 5px;
   outline: none;
+  font-size: 16px;
+}
+.auth-form input:hover {
+    border-color: #b09292;
+    color: #000000;
 }
 
 .auth-form button {
-  background-color: #5a67d8;
-  border: none;
-  color: white;
+  background-color: #000000;
+  border: rgb(205, 205, 205);
+  color: rgb(255, 255, 255);
   padding: 10px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 17px;
+}
+.auth-form button:hover {
+  background-color: #4c4949;
+  color: #ffffff;
+}
+
+.auth-form p {
+
+  font-style: oblique;
+  
+  color: #000000;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: underline;
+  
+  height: 20px;
+
+}
+
+.action-buttons {
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  background-color: #dfdfdf;
+  border: #404040;
+  border-radius: 6px;
+  font-size: 30px;
+
+  
+}
+/* ButtonStyles.css */
+.custom-button {
+  padding: 18px 55px;
+  margin: 5px;
+  font-size: 18px;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.auth-form p {
-  color: #5a67d8;
-  cursor: pointer;
+.custom-withdraw-button {
+  background-color: #d10000; /* Red color */
+  color: white;
+
+}
+.custom-withdraw-button:hover {
+  background-color: #ff5f5f;
+
+}
+
+.custom-details-button {
+  background-color: #000000; /* Green color */
+  color: #ffffff;
+}
+.custom-details-button:hover{
+  background-color: #575757;
+}
+
+
+.custom-deposit-button {
+  background-color: #00b60f; /* Blue color */
+  color: white;
+}
+.custom-deposit-button:hover{
+  background-color: #007b0a;
 }

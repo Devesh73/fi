@@ -42,15 +42,16 @@ const DepositPage = ({ loggedInUser }) => {
     <div className="deposit-container">
       <h2>Deposit Money</h2>
       <div className="deposit-form">
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <button onClick={handleDeposit}>Submit</button>
-        <p className="message">{message}</p>
-      </div>
+      <input
+       type="number"
+       className="custom-amount-input"
+       placeholder="Amount"
+       value={amount}
+       onChange={(e) => setAmount(e.target.value)}
+      />
+      <button className="custom-submit-button" onClick={handleDeposit}>Submit</button>
+      <p className="message">{message}</p>
+     </div>
     </div>
   );
 };

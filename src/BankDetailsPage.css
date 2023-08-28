@@ -1,14 +1,15 @@
+
 .bank-details-container, .deposit-container, .withdraw-container {
   background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 20px;
   padding: 30px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .bank-details-container h2, .deposit-container h2, .withdraw-container h2 {
-  color: #5a67d8;
+  color: #000000;
   margin-bottom: 15px;
 }
 
@@ -20,3 +21,4 @@
   color: #ff6347;
   margin-top: 10px;
 }
+

@@ -155,13 +155,13 @@ const HomeLoggedIn = ({ loggedInUser, handleLogout }) => {
       </h2>
       <div className="action-buttons">
         <Link to="/withdraw">
-          <button>Withdraw</button>
+        <button className="custom-button custom-withdraw-button">Withdraw</button>
         </Link>
         <Link to="/bank-details">
-          <button>Check Bank Details</button>
+        <button className="custom-button custom-details-button">Check Bank Details</button>
         </Link>
         <Link to="/deposit">
-          <button>Deposit</button>
+        <button className="custom-button custom-deposit-button">Deposit</button>
         </Link>
       </div>
       <button className="logout-button" onClick={handleLogout}>

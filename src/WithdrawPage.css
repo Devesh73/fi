@@ -1,22 +1,102 @@
-.bank-details-container, .deposit-container, .withdraw-container {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+.withdraw-container {
+  background-color: #fefeff; /* Dark background */
+  border-radius: 7px;
+  padding: 100px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
+  color: #ffffff; /* Light text color */
 }
 
-.bank-details-container h2, .deposit-container h2, .withdraw-container h2 {
-  color: #5a67d8;
+ .deposit-container h2, .withdraw-container h2 {
+  color: #1600bd; /* Tesla red */
+  height: 200px;
   margin-bottom: 15px;
+  font-size: 30px;
+  text-align: left;
+  text-transform: uppercase;
+}
+.deposit-container{
+  background-color: #fefeff; /* Dark background */
+  border-radius: 7px;
+  padding: 100px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: #ffffff; /* Light text color */
 }
 
 .bank-details-container p, .deposit-container p, .withdraw-container p {
-  margin: 10px;
+  margin: 100px;
+  font-size: 16px;
 }
 
 .bank-details-container .loading, .deposit-container .message, .withdraw-container .message {
-  color: #ff6347;
-  margin-top: 10px;
+  color: #ff0000; /* Tesla red */
+  margin-top: 50px;
+  font-size: 24px;
+}
+.bank-details-container h2 {
+  font-size: xx-large;
+  text-transform: uppercase;
+  text-decoration: underline;
+
+}
+
+.custom-submit-button {
+  background-color: #2a2a2a; 
+  padding: 10px 14px;
+  border:#656565;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #ffffff;
+  transition: background-color 0.3s ease, transform 0.0s ease;
+}
+
+.custom-submit-button:hover {
+  background-color: #656565; 
+  transform: scale(1.05); 
+}
+.custom-amount-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+  width: 50%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease;
+  
+}
+
+.custom-amount-input:focus {
+  border-color: #ff4500; 
+}
+/* Customize withdraw button */
+.withdraw-button {
+  background-color: #ff4500; /* Tesla red */
+  color: white;
+}
+
+.withdraw-button:hover {
+  background-color: #ff6347; /* Slightly lighter red on hover */
+}
+
+/* Customize details button */
+.details-button {
+  background-color: #1e90ff; /* Royal blue */
+  color: white;
+}
+
+.details-button:hover {
+  background-color: #4d8fff; /* Slightly lighter blue on hover */
+}
+
+/* Customize deposit button */
+.deposit-button {
+  background-color: #32cd32; /* Lime green */
+  color: white;
+}
+
+.deposit-button:hover {
+  background-color: #3ebf3e; /* Slightly lighter green on hover */
 }

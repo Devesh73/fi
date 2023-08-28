@@ -6,6 +6,7 @@ import 'firebase/compat/firestore';
 
 const WithdrawPage = ({ loggedInUser }) => {
   const [amount, setAmount] = useState('');
+
   const [message, setMessage] = useState('');
 
   const handleWithdraw = async () => {
@@ -46,13 +47,15 @@ const WithdrawPage = ({ loggedInUser }) => {
     <div className="withdraw-container">
       <h2>Withdraw Money</h2>
       <div className="withdraw-form">
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <button onClick={handleWithdraw}>Submit</button>
+      <input
+       type="number"
+       className="custom-amount-input"
+       placeholder="Amount"
+       value={amount}
+      onChange={(e) => setAmount(e.target.value)}
+      />
+
+<button className="custom-submit-button" onClick={handleWithdraw}>Submit</button>
         <p className="message">{message}</p>
       </div>
     </div>
@@ -60,3 +63,4 @@ const WithdrawPage = ({ loggedInUser }) => {
 };
 
 export default WithdrawPage;
+

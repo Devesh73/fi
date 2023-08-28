@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './BankDetailsPage.css';
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -36,6 +37,7 @@ const BankDetailsPage = ({ loggedInUser }) => {
       ) : (
         <p>Loading user data...</p>
       )}
+      
     </div>
   );
 };
